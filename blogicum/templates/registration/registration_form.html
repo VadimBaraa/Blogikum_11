@@ -1,0 +1,75 @@
+{% load static %}
+{% load django_bootstrap5 %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Верхний блок навигации -->
+        <nav>
+            <ul>
+                <li><a href="/">Лента записей</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Контейнер для регистрации -->
+        <div class="registration-container">
+            <div class="registration-card">
+                <h2 class="registration-header">Регистрация</h2>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Имя пользователя -->
+                    <div class="form-group">
+                        <label for="id_username">Имя пользователя</label>
+                        <input type="text" name="username" id="id_username" class="form-control" value="{{ form.username.value }}">
+                        {% if form.username.errors %}
+                            <div class="error">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Пароль -->
+                    <div class="form-group">
+                        <label for="id_password1">Пароль</label>
+                        <input type="password" name="password1" id="id_password1" class="form-control" value="{{ form.password1.value }}">
+                        {% if form.password1.errors %}
+                            <div class="error">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Повторите пароль -->
+                    <div class="form-group">
+                        <label for="id_password2">Повторите пароль</label>
+                        <input type="password" name="password2" id="id_password2" class="form-control" value="{{ form.password2.value }}">
+                        {% if form.password2.errors %}
+                            <div class="error">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Кнопка отправки -->
+                    <button type="submit" class="btn-submit">Зарегистрироваться</button>
+                </form>
+
+                <!-- Ссылка на вход -->
+                <div class="login-link">
+                    Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="copyright">
+            © Test_Forms
+        </div>
+    </footer>
+</body>
+</html>
